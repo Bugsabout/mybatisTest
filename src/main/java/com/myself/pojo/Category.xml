@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.myself.pojo">
+    <!--通过一句cache,这样mybatis-config中配置的二级缓存encache就可以使用了-->
+    <cache/>
+
+    <!--插入语句-->
+    <insert id="addCategory" parameterType="Category">
+      insert into category_(name)values(#{name})
+    </insert>
+    <!--删除语句-->
+    <delete id="deleteCategory" parameterType="Category">
+    delete from category_ where id=#{id}
+    </delete>
+    <!--更新语句-->
+    <update id="updateCategory" parameterType="Category">
+      update category_ set name=#{name } where id=#{id}
+    </update>
+    <!--根据id查询类对象-->
+    <select id="getCategory" parameterType="_int" resultType="Category">
+    select * from category_ where id=#{id}
+    </select>
+    <!--获取对象的集合-->
+    <select id="listCategory" resultType="Category">
+            select * from   category_
+     </select>
+
+    <!--根据名称模糊查询-->
+    <select id="listCategoryByName" parameterType="string" resultType="Category">
+    select * from category_ where name like concat('%',#{0},'%')
+    </select>
+
+
+
+</mapper>

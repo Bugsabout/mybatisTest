@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <!--一些数据加载的设置-->
+    <settings>
+        <!-- 打开延迟加载的开关 -->
+        <setting name="lazyLoadingEnabled" value="true"/>
+        <!-- 将积极加载改为消息加载即按需加载 -->
+        <setting name="aggressiveLazyLoading" value="false"/>
+        <!--二级缓存配置-->
+        <setting name="cacheEnabled" value="true"/>
+    </settings>
+
+
+    <!--包的别名，自动扫描com.myself.pojo下的类型，后续再使用xml文件的resultType时，可以直接使用类名，而不必要写全。也可以不设置-->
+    <typeAliases>
+        <package name="com.myself.pojo"/>
+    </typeAliases>
+
+
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <!--主要提供链接数据库用的驱动，数据库名称，编码方式，账号密码-->
+                <property name="driver" value="com.mysql.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://localhost:3306/how2java?characterEncoding=UTF-8"/>
+                <property name="username" value="root"/>
+                <property name="password" value="123456"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <!--指明映射类的文件的位置-->
+    <mappers>
+        <mapper resource="com/myself/pojo/Category.xml"/>
+    </mappers>
+</configuration>
